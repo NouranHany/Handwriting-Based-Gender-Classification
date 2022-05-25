@@ -11,10 +11,14 @@ Plots the given image
 
 params:
 -------
-img: image to be plotted.
+img:         image to be plotted.
+normalized:  whether the image values ranges from 0-255 or 0-1. default
 '''
-def show_image(img):
-    plt.imshow(img, cmap="gray", vmin=0, vmax=255)
+def show_image(img, normalized=False):
+    if (normalized):
+        plt.imshow(img, cmap="gray", vmin=0, vmax=1)
+    else:
+        plt.imshow(img, cmap="gray", vmin=0, vmax=255)
     plt.axis("off")
     plt.show()
 
