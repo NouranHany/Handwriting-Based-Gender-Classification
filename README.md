@@ -13,3 +13,10 @@ Identify the gender of the writer based on his/her handwriting.
 - LBP
 - Hog features
 - GLCM statistics
+- Hinge & Cold
+
+## Classification models used
+- SVM
+- Random Forest
+- KNN 
+
