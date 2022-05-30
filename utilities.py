@@ -2,9 +2,9 @@
 
 import os
 import cv2
+from natsort import natsorted
 import numpy as np
 import matplotlib.pyplot as plt 
-import glob
 from skimage.measure import find_contours
 '''
 Plots the given image
@@ -53,12 +53,15 @@ return:
 imgs      list    list of all images read from the directory. each image is read as a numpy array.
 
 '''
+
 def read_imgs(dir_path='.'):
-    paths = glob.glob(dir_path+'/**')
+    paths = os.listdir(dir_path)
+    paths = natsorted(paths)
     imgs = []
     for img_path in paths:
-        imgs.append(cv2.imread(img_path))
-    return imgs
+        imgs.append(cv2.imread(dir_path+img_path))
+    return imgs, paths
+
 
 
 '''
