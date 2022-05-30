@@ -9,7 +9,11 @@ import imutils
 from PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 from utilities import *
+from skimage.feature import local_binary_pattern
 
+# settings for LBP
+radius = 3
+n_points = 8 * radius
 
 # hinge parameters
 N_ANGLE_BINS = 40
@@ -25,7 +29,17 @@ R_INNER = 5.0
 R_OUTER = 35.0
 K_S = np.arange(3, 8)
 
+def extract_lbp(image):
 
+    img = threshold_image(image)
+    Ymin, Ymax, Xmin, Xmax = extract_textarea_borders(img)
+    text = image[Ymin : Ymax, Xmin : Xmax]
+
+    gray_text = cv2.cvtColor(text, cv2.COLOR_BGR2GRAY)
+
+    # lbp = local_binary_pattern(image, n_points, radius, METHOD)
+    lbp = local_binary_pattern(gray_text, n_points, radius, 'uniform')
+    return lbp
 
 def get_hinge_features(contours):    
     hist = np.zeros((N_ANGLE_BINS, N_ANGLE_BINS))
