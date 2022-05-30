@@ -60,7 +60,7 @@ def read_imgs(dir_path='.'):
     imgs = []
     for img_path in paths:
         imgs.append(cv2.imread(dir_path+img_path))
-    return imgs, paths
+    return imgs
 
 
 
